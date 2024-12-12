@@ -17,6 +17,12 @@
                     <span>Users</span></a>
             </li>
 
+            <li class="nav-item">
+                <a href="{{ route('companies.show', 1) }}" class="nav-link">
+                    <i class="fas fa-columns"></i>
+                    <span>Profil Yayasan</span>
+                </a>
+            </li>
 
     </aside>
 </div>

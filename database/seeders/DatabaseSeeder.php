@@ -21,5 +21,17 @@ class DatabaseSeeder extends Seeder
          'email' => 'esa@example.com',
          'password' => Hash::make('12345678')
         ]);
+
+        //data dummy for company
+        \App\Models\Company::create([
+            'name' => 'YP NUR ADIA',
+            'email' => 'ypnuradia@example.com',
+            'address' => 'Jl. Besar Tj. Selamat No.100',
+            'latitude' => '3.5296439910753774',
+            'longitude' => '98.59105532960814',
+            'radius_km' => '0.5',
+            'time_in' => '06.30',
+            'time_out' => '17.30',
+        ]);
     }
 }
