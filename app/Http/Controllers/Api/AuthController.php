@@ -41,22 +41,22 @@ class AuthController extends Controller
 
         return response(['message' => 'Logged out'], 200);
     }
-/*
+
     //update image profile & face_embedding
     public function updateProfile(Request $request)
     {
         $request->validate([
-            // 'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'face_embedding' => 'required',
         ]);
 
         $user = $request->user();
-        // $image = $request->file('image');
+        $image = $request->file('image');
         $face_embedding = $request->face_embedding;
 
         // //save image
-        // $image->storeAs('public/images', $image->hashName());
-        // $user->image_url = $image->hashName();
+        $image->storeAs('public/images', $image->hashName());
+        $user->image_url = $image->hashName();
         $user->face_embedding = $face_embedding;
         $user->save();
 
@@ -66,20 +66,4 @@ class AuthController extends Controller
         ], 200);
     }
 
-    //update fcm token
-    public function updateFcmToken(Request $request)
-    {
-        $request->validate([
-            'fcm_token' => 'required',
-        ]);
-
-        $user = $request->user();
-        $user->fcm_token = $request->fcm_token;
-        $user->save();
-
-        return response([
-            'message' => 'FCM token updated',
-        ], 200);
-    }
-*/
 }

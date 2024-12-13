@@ -1,7 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html">Stisla</a>
+            <a href="index.html">Absensi</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">St</a>
@@ -21,6 +21,13 @@
                 <a href="{{ route('companies.show', 1) }}" class="nav-link">
                     <i class="fas fa-columns"></i>
                     <span>Profil Yayasan</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('attendances.index') }}" class="nav-link">
+                    <i class="fas fa-columns"></i>
+                    <span>Attendances</span>
                 </a>
             </li>
 

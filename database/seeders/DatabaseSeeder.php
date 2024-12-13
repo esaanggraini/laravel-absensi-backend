@@ -33,5 +33,9 @@ class DatabaseSeeder extends Seeder
             'time_in' => '06.30',
             'time_out' => '17.30',
         ]);
+
+        $this->call([
+            AttendanceSeeder::class,
+        ]);
     }
 }
