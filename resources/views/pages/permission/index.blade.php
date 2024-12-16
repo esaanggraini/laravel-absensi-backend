@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Attendances')
+@section('title', 'Permissions')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -11,25 +11,25 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Attendances</h1>
+                <h1>Permissions</h1>
                 {{-- <div class="section-header-button">
-                    <a href="{{ route('attendances.create') }}" class="btn btn-primary">Add New</a>
+                    <a href="{{ route('permissions.create') }}" class="btn btn-primary">Add New</a>
                 </div> --}}
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Attendances</a></div>
-                    <div class="breadcrumb-item">All Attendances</div>
+                    <div class="breadcrumb-item"><a href="#">Permissions</a></div>
+                    <div class="breadcrumb-item">All Permissions</div>
                 </div>
             </div>
             <div class="section-body">
                 <div class="row">
-                    {{-- <div class="col-12">
+                    <div class="col-12">
                         @include('layouts.alert')
-                    </div> --}}
+                    </div>
                 </div>
-                <h2 class="section-title">Attendances</h2>
+                <h2 class="section-title">Permissions</h2>
                 <p class="section-lead">
-                    You can manage all Attendances, such as editing, deleting and more.
+                    You can manage all Permissions, such as editing, deleting and more.
                 </p>
 
 
@@ -37,12 +37,12 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>All Posts</h4>
+                                <h4>All Permissions</h4>
                             </div>
                             <div class="card-body">
 
                                 <div class="float-right">
-                                    <form method="GET" action="{{ route('attendances.index') }}">
+                                    <form method="GET" action="{{ route('permissions.index') }}">
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search by name" name="name">
                                             <div class="input-group-append">
@@ -59,44 +59,55 @@
                                         <tr>
 
                                             <th>Name</th>
-                                            <th>Date</th>
-                                            <th>Time In</th>
-                                            <th>Time Out</th>
-                                            <th>Latlong In</th>
-                                            <th>Latlong Out</th>
+                                            <th>Position</th>
+                                            <th>Department</th>
+                                            <th>Date Permission</th>
+                                            <th>Is Approval</th>
 
                                             <th>Action</th>
                                         </tr>
-                                        @foreach ($attendances as $attendance)
+                                        @foreach ($permissions as $permission)
                                             <tr>
 
-                                                <td>{{ $attendance->user->name }}
+                                                <td>{{ $permission->user->name }}
                                                 </td>
                                                 <td>
-                                                    {{ $attendance->date }}
+                                                    {{ $permission->user->position }}
                                                 </td>
                                                 <td>
-                                                    {{ $attendance->time_in }}
+                                                    {{ $permission->user->department }}
                                                 </td>
                                                 <td>
-                                                    {{ $attendance->time_out }}
+                                                    {{ $permission->date_permission }}
                                                 </td>
                                                 <td>
-                                                    {{ $attendance->latlon_in }}
+                                                    @if ($permission->is_approved == 1)
+                                                        Approved
+                                                    @else
+                                                        Not Approved
+                                                    @endif
                                                 </td>
-                                                <td>
-                                                    {{ $attendance->latlon_out }}
-                                                </td>
+
 
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <a href='{{ route('attendances.edit', $attendance->id) }}'
+                                                        <a href='{{ route('permissions.show', $permission->id) }}'
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
-                                                            Edit
+                                                            Detail
                                                         </a>
 
-                                                        <form action="{{ route('attendances.destroy', $attendance->id) }}"
+                                                        {{--Kode Perubahan--}}
+                                                        <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST" class="ml-2">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
+                                                                <i class="fas fa-times"></i> Delete
+                                                            </button>
+                                                        </form>
+
+                                                        {{--
+                                                        <form action="{{ route('permissions.destroy', $permission->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
@@ -105,6 +116,8 @@
                                                                 <i class="fas fa-times"></i> Delete
                                                             </button>
                                                         </form>
+                                                        --}}
+
                                                     </div>
                                                 </td>
                                             </tr>
@@ -114,7 +127,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $attendances->withQueryString()->links() }}
+                                    {{ $permissions->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>
